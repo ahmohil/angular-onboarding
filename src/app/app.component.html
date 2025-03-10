@@ -1,0 +1,19 @@
+<div class="container">
+  <header>
+    <h1>Angular Onboarding</h1>
+    <nav>
+      <ul>
+        <li><a routerLink="/view-child-demo" routerLinkActive="active">ViewChild Demo</a></li>
+        <li><a routerLink="/content-child-demo" routerLinkActive="active">ContentChild Demo</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+  
+  <footer>
+    <p>{{ greeting }}! Angular Onboarding Guide by Hanan - {{ currentYear }} 🎉</p>
+  </footer>
+</div>

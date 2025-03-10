@@ -1,0 +1,34 @@
+<div class="view-child-container">
+  <h2 #title>ViewChild Demo</h2>
+  <p class="description">
+    This demo shows how to use <code>@ViewChild</code> to access a child component or DOM element directly.
+  </p>
+
+  <div class="demo-section">
+    <h3>Child Component (Counter)</h3>
+    <app-counter #counter></app-counter>
+  </div>
+  
+  <div class="parent-controls">
+    <h3>Parent Controls (using ViewChild)</h3>
+    <p class="hint">These buttons control the Counter component through @ViewChild reference</p>
+    <div class="buttons">
+      <button (click)="incrementCounter()">Increment from Parent</button>
+      <button (click)="decrementCounter()">Decrement from Parent</button>
+      <button (click)="resetCounter()">Reset from Parent</button>
+    </div>
+  </div>
+
+  <div class="dom-controls">
+    <h3>DOM Element Manipulation</h3>
+    <p class="hint">These buttons modify the title DOM element through ElementRef</p>
+    <div class="buttons">
+      <button (click)="changeTitle()">Change Title</button>
+      <button (click)="restoreTitle()">Restore Title</button>
+    </div>
+  </div>
+
+  <div class="message-box" *ngIf="message">
+    <p>{{ message }}</p>
+  </div>
+</div>

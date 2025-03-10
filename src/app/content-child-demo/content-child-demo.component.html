@@ -1,0 +1,60 @@
+<div class="content-child-container">
+  <h2>ContentChild & ContentChildren Demo</h2>
+  <p class="description">
+    This demo shows how to use <code>@ContentChild</code> and <code>@ContentChildren</code> to access components projected into a component's template.
+  </p>
+
+  <div class="demo-section">
+    <h3>Tab Group with Content Projection</h3>
+    <p>The TabGroup component uses <code>@ContentChildren</code> to find all Tab components placed between its tags.</p>
+    
+    <div class="controls">
+      <button (click)="toggleDynamicTab()">{{ isDynamicContentShown ? 'Hide' : 'Show' }} Dynamic Tab</button>
+      <button (click)="changeDynamicTabTitle()" *ngIf="isDynamicContentShown">Change Dynamic Tab Title</button>
+    </div>
+    
+    <app-tab-group>
+      <app-tab title="Tab 1">
+        <h4>Basic Tab Content</h4>
+        <p>This content is projected into the tab using <code>ng-content</code>.</p>
+        <p>The TabGroup component uses <code>@ContentChildren</code> to query for all Tab components.</p>
+      </app-tab>
+      
+      <app-tab title="Tab 2">
+        <h4>Code Example - ContentChildren</h4>
+        <pre><code>@ContentChildren(TabComponent) tabs: QueryList&lt;TabComponent&gt;;</code></pre>
+        <p>The TabGroup iterates through these tabs to create the tab headers and manages their active state.</p>
+      </app-tab>
+      
+      <app-tab title="Tab 3">
+        <h4>When to Use ContentChildren?</h4>
+        <ul>
+          <li>When you need to query multiple child components projected via ng-content</li>
+          <li>For components like tabs, accordions, or menu systems</li>
+          <li>When building custom form controls that need to access all child inputs</li>
+        </ul>
+      </app-tab>
+
+      <app-tab *ngIf="isDynamicContentShown" [title]="dynamicTabTitle">
+        <h4>Dynamic Tab Content</h4>
+        <p>This tab is conditionally rendered and its title can be changed.</p>
+        <p>ContentChildren automatically updates when projected content changes!</p>
+      </app-tab>
+    </app-tab-group>
+  </div>
+
+  <div class="explanation">
+    <h3>How ContentChild Works</h3>
+    <div class="code-example">
+      <p>In the TabGroup component:</p>
+      <pre><code>@ContentChildren(TabComponent) tabs: QueryList&lt;TabComponent&gt;;</code></pre>
+      <p>This queries all TabComponent instances projected into the component via ng-content.</p>
+      
+      <h4>Differences from ViewChild:</h4>
+      <ul>
+        <li><strong>@ViewChild/@ViewChildren</strong>: Query components/elements in the component's template</li>
+        <li><strong>@ContentChild/@ContentChildren</strong>: Query components/elements projected into the component</li>
+      </ul>
+    </div>
+  </div>
+</div>
