@@ -1,0 +1,115 @@
+<div class="template-ref-container">
+  <h2>TemplateRef Demo</h2>
+  <p class="description">
+    This demo shows how to use <code>TemplateRef</code> to define and switch
+    between different templates dynamically.
+  </p>
+
+  <!-- Define our templates for later use -->
+  <ng-template #userTemplate let-user>
+    <div class="user-details user-role">
+      <h3>User Details</h3>
+      <div class="detail-row">
+        <span class="label">ID:</span>
+        <span class="value">{{ user.id }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="label">Name:</span>
+        <span class="value">{{ user.name }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="label">Role:</span>
+        <span class="value">Standard User</span>
+      </div>
+      <div class="actions">
+        <button (click)="goBackToList()">Back to List</button>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #adminTemplate let-admin>
+    <div class="user-details admin-role">
+      <h3>Administrator Details</h3>
+      <div class="detail-row">
+        <span class="label">ID:</span>
+        <span class="value">{{ admin.id }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="label">Name:</span>
+        <span class="value">{{ admin.name }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="label">Role:</span>
+        <span class="value">Administrator</span>
+      </div>
+      <div class="detail-row">
+        <span class="label">Privileges:</span>
+        <span class="value">Full Access</span>
+      </div>
+      <div class="actions">
+        <button (click)="goBackToList()">Back to List</button>
+      </div>
+    </div>
+  </ng-template>
+
+  <!-- Display user list or selected user template -->
+  <div class="demo-section" *ngIf="activeView === 'list'">
+    <h3>User List</h3>
+    <p>
+      Click on a user to see details rendered with the appropriate template:
+    </p>
+    <ul class="user-list">
+      <li
+        *ngFor="let user of users"
+        [class.admin-item]="user.role === 'admin'"
+        (click)="showUserDetails(user)"
+      >
+        {{ user.name }} -
+        {{ user.role === "admin" ? "Administrator" : "Standard User" }}
+      </li>
+    </ul>
+  </div>
+
+  <div
+    class="demo-section"
+    *ngIf="activeView === 'details' && selectedUser && selectedTemplate"
+  >
+    <!-- Dynamically render the selected template -->
+    <ng-container 
+      [ngTemplateOutlet]="selectedTemplate" 
+      [ngTemplateOutletContext]="createContext(selectedUser)">
+    </ng-container>
+  </div>
+
+  <div class="explanation">
+    <h3>How TemplateRef Works</h3>
+    <div class="code-example">
+      <p>
+        TemplateRef is a reference to an
+        <code>&lt;ng-template&gt;</code> element:
+      </p>
+
+      <pre><code>@ViewChild('userTemplate') userTemplate: TemplateRef&lt;any&gt;;</code></pre>
+
+      <p>Key points about TemplateRef:</p>
+      <ul>
+        <li>
+          <strong>Template definition:</strong> Content within
+          <code>&lt;ng-template&gt;</code> is not rendered by default
+        </li>
+        <li>
+          <strong>Context binding:</strong> Use
+          <code>let-variableName</code> for variables passed to the template
+        </li>
+        <li>
+          <strong>Dynamic rendering:</strong> Use
+          <code>[ngTemplateOutlet]</code> to render a template dynamically
+        </li>
+        <li>
+          <strong>Context passing:</strong> Use
+          <code>[ngTemplateOutletContext]</code> to pass data to the template
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

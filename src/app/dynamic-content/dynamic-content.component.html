@@ -1,0 +1,10 @@
+<div class="dynamic-content" [style.background-color]="data?.color || '#e0e0e0'">
+  <div class="content-header">
+    <h4>Dynamic Component #{{ index }}</h4>
+    <span class="timestamp">Created: {{ createTime | date:'medium' }}</span>
+  </div>
+  <div class="content-body">
+    <p *ngIf="data?.message">{{ data.message }}</p>
+    <p *ngIf="!data?.message">This is a dynamically created component!</p>
+  </div>
+</div>

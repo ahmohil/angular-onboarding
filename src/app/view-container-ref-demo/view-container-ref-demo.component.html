@@ -1,0 +1,53 @@
+<div class="container-ref-container">
+  <h2>ViewContainerRef Demo</h2>
+  <p class="description">
+    This demo shows how to use <code>ViewContainerRef</code> to dynamically create and manage components.
+  </p>
+
+  <div class="demo-section">
+    <h3>Dynamic Component Creation</h3>
+    <div class="controls">
+      <button (click)="createComponent()">Create Component</button>
+      <button (click)="insertComponentAtBeginning()">Insert At Beginning</button>
+      <button (click)="removeLastComponent()" [disabled]="componentRefs.length === 0">Remove Last</button>
+      <button (click)="removeAllComponents()" [disabled]="componentRefs.length === 0">Clear All</button>
+    </div>
+    
+    <div class="component-count" *ngIf="componentRefs.length > 0">
+      Total Components: {{ componentRefs.length }}
+    </div>
+    
+    <!-- This is where dynamic components will be inserted -->
+    <div class="dynamic-container">
+      <ng-container #dynamicComponentContainer></ng-container>
+    </div>
+  </div>
+
+  <div class="explanation">
+    <h3>How ViewContainerRef Works</h3>
+    <div class="code-example">
+      <p>ViewContainerRef gives you programmatic control to create and manipulate views:</p>
+      
+      <pre><code>@ViewChild('dynamicComponentContainer', {{ '{' }} read: ViewContainerRef {{ '}' }}) 
+container: ViewContainerRef;</code></pre>
+      
+      <p>Core functionality of ViewContainerRef:</p>
+      <ul>
+        <li><strong>Component Creation:</strong> <code>createComponent(factory)</code> creates a component dynamically</li>
+        <li><strong>View Manipulation:</strong> Controls like <code>insert()</code>, <code>move()</code>, and <code>detach()</code></li>
+        <li><strong>Clearing Views:</strong> <code>clear()</code> removes all components from the container</li>
+        <li><strong>Positioning:</strong> Can specify index when inserting components to control their position</li>
+      </ul>
+      
+      <div class="usage-notes">
+        <h4>Common Use Cases:</h4>
+        <ul>
+          <li>Dynamic UI generation based on user actions or data</li>
+          <li>Toast/notification systems</li>
+          <li>Lazy-loading content within the UI</li>
+          <li>Highly interactive dashboards/editors</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
